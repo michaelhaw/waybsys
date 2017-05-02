@@ -1,0 +1,224 @@
+{# app/Resources/views/waybsys/waybill-create.html.twig #}
+
+{% extends 'waybsys/base.html.twig' %}
+
+{% block content %}
+
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+		
+		<div class="row">
+			<div class="two columns">
+				{{ form_label(form.waybill_no, 'AR No.') }}
+				{{ form_errors(form.waybill_no) }}
+				{{ form_widget(form.waybill_no, {'attr': {'class': 'u-full-width', 'placeholder': '000000'}}) }}
+			</div>
+			<div class="two columns">
+				{{ form_label(form.destination, 'Destination') }}
+				{{ form_errors(form.destination) }}
+				{{ form_widget(form.destination, {'attr': {'class': 'u-full-width', 'placeholder': 'Select destination'}}) }}
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="six columns">
+				{{ form_label(form.shipper, 'Shipper') }}
+				{{ form_errors(form.shipper) }}
+				{{ form_widget(form.shipper, {'attr': {'class': 'u-full-width', 'placeholder': 'Select Shipper'}}) }}
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="six columns">
+				{{ form_label(form.consignee, 'Consignee') }}
+				{{ form_errors(form.consignee) }}
+				{{ form_widget(form.consignee, {'attr': {'class': 'u-full-width', 'placeholder': 'Select Consignee'}}) }}
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="two columns">
+				{{ form_label(form.total_weight_charge, 'Weight Charge') }}
+				{{ form_errors(form.total_weight_charge) }}
+				{{ form_widget(form.total_weight_charge, {'attr': {'class': 'u-full-width', 'placeholder': '0.00'}}) }}
+			</div>
+			<div class="two columns">
+				{{ form_label(form.total_value_charge, 'Value Charge') }}
+				{{ form_errors(form.total_value_charge) }}
+				{{ form_widget(form.total_value_charge, {'attr': {'class': 'u-full-width', 'placeholder': '0.00'}}) }}
+			</div>
+			<div class="two columns">
+				{{ form_label(form.total_cu_msmt_charge, 'Cu MSMT Charge') }}
+				{{ form_errors(form.total_cu_msmt_charge) }}
+				{{ form_widget(form.total_cu_msmt_charge, {'attr': {'class': 'u-full-width', 'placeholder': '0.00'}}) }}
+			</div>
+			<div class="two columns">
+				{{ form_label(form.total_delivery_charge, 'Delivery Charge') }}
+				{{ form_errors(form.total_delivery_charge) }}
+				{{ form_widget(form.total_delivery_charge, {'attr': {'class': 'u-full-width', 'placeholder': '0.00'}}) }}
+			</div>
+			<div class="two columns">
+				{{ form_label(form.total_vat, 'VAT') }}
+				{{ form_errors(form.total_vat) }}
+				{{ form_widget(form.total_vat, {'attr': {'class': 'u-full-width', 'placeholder': '0.00'}}) }}
+			</div>
+			<div class="two columns">
+				{{ form_label(form.total_amount, 'TOTAL') }}
+				{{ form_errors(form.total_amount) }}
+				{{ form_widget(form.total_amount, {'attr': {'class': 'u-full-width', 'placeholder': '0.00'}}) }}
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="twelve columns">
+				{{ form_label(form.cargo, 'Cargo') }}
+				{{ form_errors(form.cargo) }}
+				<ul class="cargo" data-prototype="{{ block('_cargo_entry_widget')|e('html_attr') }}" style="list-style-type:none">
+				<!--<ul class="cargo" data-prototype="{{ form_widget(form.cargo.vars.prototype)|e('html_attr') }}">-->
+				</ul>
+			</div>
+		</div>
+		
+		{{ form_widget(form.save, {'attr': {'class': 'button-primary'}}) }}
+		
+	{{ form_end(form) }}
+
+{% endblock %}
+
+{% block _cargo_entry_widget %}
+	<div id="waybill_cargo___name__">
+		<div class="row">
+			<div class="one column">
+				<label for="waybill_cargo___name___quantity" class="required">Qty.</label>
+				<input type="text" id="waybill_cargo___name___quantity" name="waybill[cargo][__name__][quantity]" class="u-full-width" required="required" />
+			</div>
+			<div class="two columns">
+				<label for="waybill_cargo___name___unit" class="required">Unit</label>
+				<input type="text" id="waybill_cargo___name___unit" name="waybill[cargo][__name__][unit]" class="u-full-width" required="required" />
+			</div>
+			<div class="six columns">
+				<label for="waybill_cargo___name___description" class="required">Description</label>
+				<input type="text" id="waybill_cargo___name___description" name="waybill[cargo][__name__][description]" class="u-full-width" required="required" />
+			</div>
+			<div class="two columns">
+				<label for="waybill_cargo___name___declared_value" class="required">Declared Value</label>
+				<input type="text" id="waybill_cargo___name___declared_value" name="waybill[cargo][__name__][declared_value]" class="u-full-width" required="required" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="two columns">
+				<label for="waybill_cargo___name___length">Length</label>
+				<input type="text" id="waybill_cargo___name___length" name="waybill[cargo][__name__][length]" class="u-full-width" />
+			</div>
+			<div class="two columns">
+				<label for="waybill_cargo___name___width">Width</label>
+				<input type="text" id="waybill_cargo___name___width" name="waybill[cargo][__name__][width]" class="u-full-width" />
+			</div>
+			<div class="two columns">
+				<label for="waybill_cargo___name___height">Height</label>
+				<input type="text" id="waybill_cargo___name___height" name="waybill[cargo][__name__][height]" class="u-full-width" />
+			</div>
+			<div class="two columns">
+				<label for="waybill_cargo___name___total_volume">Total volume</label>
+				<input type="text" id="waybill_cargo___name___total_volume" name="waybill[cargo][__name__][total_volume]" class="u-full-width" />
+			</div>
+			<div class="two columns">
+				<label for="waybill_cargo___name___weight">Weight</label>
+				<input type="text" id="waybill_cargo___name___weight" name="waybill[cargo][__name__][weight]" class="u-full-width" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="two columns">
+				<label for="waybill_cargo___name___charge_type" class="required">Charge type</label>
+				<select id="waybill_cargo___name___charge_type" name="waybill[cargo][__name__][charge_type]" class="u-full-width">
+					<option value="VOL">Volume</option>
+					<option value="WGT">Weight</option>
+					<option value="COM">Combination</option>
+				</select>
+			</div>
+			<div class="two columns">
+				<label for="waybill_cargo___name___volume_charge">Volume charge</label>
+				<input type="text" id="waybill_cargo___name___volume_charge" name="waybill[cargo][__name__][volume_charge]" class="u-full-width" />
+			</div>
+			<div class="two columns">
+				<label for="waybill_cargo___name___weight_charge">Weight charge</label>
+				<input type="text" id="waybill_cargo___name___weight_charge" name="waybill[cargo][__name__][weight_charge]" class="u-full-width" />
+			</div>
+			<div class="two columns">
+				<label for="waybill_cargo___name___additional_charge">Additional charge</label>
+				<input type="text" id="waybill_cargo___name___additional_charge" name="waybill[cargo][__name__][additional_charge]" class="u-full-width" />
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script>
+		var $collectionHolder;
+
+		// setup an "add cargo" link
+		var $addCargoLink = $('<a href="#" class="add_cargo_link">Add cargo</a>');
+		var $newLinkLi = $('<li></li>').append($addCargoLink);
+
+		jQuery(document).ready(function() {
+			// Get the ul that holds the collection of cargo
+			$collectionHolder = $('ul.cargo');
+			
+			// add a delete link to all of the existing tag form li elements
+			$collectionHolder.find('li').each(function() {
+				addTagFormDeleteLink($(this));
+			});
+
+			// add the "add cargo" anchor and li to the cargo ul
+			$collectionHolder.append($newLinkLi);
+
+			// count the current form inputs we have (e.g. 2), use that as the new
+			// index when inserting a new item (e.g. 2)
+			$collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+			$addCargoLink.on('click', function(e) {
+				// prevent the link from creating a "#" on the URL
+				e.preventDefault();
+
+				// add a new tag form (see next code block)
+				addCargoForm($collectionHolder, $newLinkLi);
+			});
+		});
+		
+		function addCargoForm($collectionHolder, $newLinkLi) {
+			// Get the data-prototype explained earlier
+			var prototype = $collectionHolder.data('prototype');
+
+			// get the new index
+			var index = $collectionHolder.data('index');
+
+			// Replace '__name__' in the prototype's HTML to
+			// instead be a number based on how many items we have
+			var newForm = prototype.replace(/__name__/g, index);
+
+			// increase the index with one for the next item
+			$collectionHolder.data('index', index + 1);
+
+			// Display the form in the page in an li, before the "Add cargo" link li
+			var $newFormLi = $('<li></li>').append(newForm);
+			$newLinkLi.before($newFormLi);
+			
+			// add a delete link to the new form
+			addTagFormDeleteLink($newFormLi);
+		}
+		
+		function addTagFormDeleteLink($tagFormLi) {
+			var $removeFormA = $('<a href="#">Delete Cargo</a>');
+			$tagFormLi.append($removeFormA);
+
+			$removeFormA.on('click', function(e) {
+				// prevent the link from creating a "#" on the URL
+				e.preventDefault();
+
+				// remove the li for the tag form
+				$tagFormLi.remove();
+			});
+		}
+	</script>
+{% endblock %}

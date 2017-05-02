@@ -1,0 +1,580 @@
+<html>
+
+	<head>
+		
+		<style>
+		
+			body {
+				width: 8.4in;
+				height: 5.4in;
+			}
+			
+			table {
+				border-collapse: collapse;
+				border-spacing: 0px;
+				font-size: 12px;
+			}
+			
+			td {
+				width: 0.25in;
+				height: 0.25in;
+				<!--border-bottom: 1px solid black;-->
+				<!--border-right: 1px solid black;-->
+			}
+			
+			.cargoarea {
+				vertical-align: top;
+				padding-top: 5px;
+			}
+			
+			@media print {
+				html, body {
+					display: block; 
+					font-family: "Calibri";
+					margin: 0px;
+				}
+
+				@page {
+				  size: 8.4in 5.4in;
+				  margin: 0px;
+				}
+
+				.logo {
+				  width: 30%;
+				}
+
+			}
+		
+		</style>
+
+	</head>
+	
+	<body>
+		<table cellpadding="0">
+			<!-- 1st inch-->
+			<tr class="first-qtr-inch">
+				<td colspan="33"></td>
+			</tr>
+			<tr class="second-qtr-inch">
+				<td colspan="33"></td>
+			</tr>
+			<tr class="third-qtr-inch">
+				<td colspan="33"></td>
+			</tr>
+			<tr class="fourth-qtr-inch">
+				<td colspan="33"></td>
+			</tr>
+			<!-- 2nd inch-->
+			<tr class="first-qtr-inch">
+				<td colspan="7">
+				<td colspan="15">{{ waybill.getConsignee().getCustomerName() }}</td>
+				<td colspan="3"></td>
+				<td colspan="7">{{ waybill.getDestination() }}</td>
+				<td></td>
+			</tr>
+			<tr class="second-qtr-inch">
+				<td colspan="5"></td>
+				<td colspan="17">{{ waybill.getConsignee().getCustomerAddress() }}</td>
+				<td colspan="11"></td>
+			</tr>
+			<tr class="third-qtr-inch">
+				<td colspan="5"></td>
+				<td colspan="17"></td>
+				<td colspan="6"></td>
+				<td colspan="4">{{ waybill.getTotalWeightCharge() }}</td>
+				<td></td>
+			</tr>
+			<tr class="fourth-qtr-inch">
+				<td colspan="28"></td>
+				<td colspan="4">{{ waybill.getTotalValueCharge() }}</td>
+				<td></td>
+			</tr>
+			<!-- 3rd inch-->
+			<tr class="first-qtr-inch">
+				<td colspan="2"></td>
+				<td colspan="2" rowspan="7" id="BoxQuantity" class="cargoarea">
+					{% for cargo in waybill.getCargo() %}
+						<p>{{ cargo.getQuantity() }}</p>
+					{% endfor %}
+				</td>
+				<td colspan="2" rowspan="7" id="BoxUnit" class="cargoarea">
+					{% for cargo in waybill.getCargo() %}
+						<p>{{ cargo.getUnit() }}</p>
+					{% endfor %}
+				</td>
+				<td></td>
+				<td colspan="10" rowspan="7" id="BoxDescription" class="cargoarea">
+					{% for cargo in waybill.getCargo() %}
+						<p>{{ cargo.getDescription() }}</p>
+					{% endfor %}
+				</td>
+				<td colspan="3" rowspan="7" id="BoxMeasurement" class="cargoarea">
+					{% for cargo in waybill.getCargo() %}
+						{% if cargo.getChargeType() == 'VOL' %}
+							<p>Vol Here</p>
+						{% elseif cargo.getChargeType() == 'WGT' %}
+							<p>Wgt Here</p>
+						{% endif %}
+					{% endfor %}
+				</td>
+				<td colspan="3" rowspan="7" id="BoxValue" class="cargoarea">
+					{% for cargo in waybill.getCargo() %}
+						<p>{{ cargo.getDeclaredValue() }}</p>
+					{% endfor %}
+				</td>
+				<td colspan="5"></td>
+				<td colspan="4">{{ waybill.getTotalCuMsmtCharge() }}</td>
+				<td></td>
+			</tr>
+			<tr class="second-qtr-inch">
+				<td colspan="2"></td>
+				<td></td>
+				<td colspan="5"></td>
+				<td colspan="4">{{ waybill.getTotalDeliveryCharge() }}</td>
+				<td></td>
+			</tr>
+			<tr class="third-qtr-inch">
+				<td colspan="2"></td>
+				<td></td>
+				<td colspan="5"></td>
+				<td colspan="4">{{ waybill.getTotalVat() }}</td>
+				<td></td>
+			</tr>
+			<tr class="fourth-qtr-inch">
+				<td colspan="2"></td>
+				<td></td>
+				<td colspan="5"></td>
+				<td colspan="4">{{ waybill.getTotalAmount() }}</td>
+				<td></td>
+			</tr>
+			<!-- 4th inch-->
+			<tr class="first-qtr-inch">
+				<td colspan="2"></td>
+				<td></td>
+				<td colspan="5"></td>
+				<td colspan="4">DATE</td>
+				<td></td>
+			</tr>
+			<tr class="second-qtr-inch">
+				<td colspan="2"></td>
+				<td></td>
+				<td></td>
+				<td colspan="3">BY</td>
+				<td></td>
+				<td colspan="3">BY AT</td>
+				<td colspan="2"></td>
+			</tr>
+			<tr class="third-qtr-inch">
+				<td colspan="2"></td>
+				<td></td>
+				<td colspan="10"></td>
+			</tr>
+			<tr class="fourth-qtr-inch">
+				<td colspan="33"></td>
+			</tr>
+			<!-- 5th inch-->
+			<tr class="first-qtr-inch">
+				<td colspan="33"></td>
+			</tr>
+			<tr class="second-qtr-inch">
+				<td colspan="5"></td>
+				<td colspan="13">{{ waybill.getShipper().getCustomerName() }}</td>
+				<td colspan="15"></td>
+			</tr>
+			<tr class="third-qtr-inch">
+				<td colspan="5"></td>
+				<td colspan="13">{{ waybill.getShipper().getCustomerAddress() }}</td>
+				<td colspan="15"></td>
+			</tr>
+			<tr class="fourth-qtr-inch">
+				<td colspan="33"></td>
+			</tr>
+			<!-- 6th inch (Individual TDs required to keep size)-->
+			<tr class="first-qtr-inch">
+				<td></td><td></td><td></td><td></td>
+				<td></td><td></td><td></td><td></td>
+				<td></td><td></td><td></td><td></td>
+				<td></td><td></td><td></td><td></td>
+				<td></td><td></td><td></td><td></td>
+				<td></td><td></td><td></td><td></td>
+				<td></td><td></td><td></td><td></td>
+				<td></td><td></td><td></td><td></td>
+				<td></td>
+			</tr>
+		
+		</table>
+
+		<!--
+		<div class="table">
+			<div class="table-row">
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+			</div>
+		</div>
+
+		<div class="table">
+			<div class="table-row">
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+			</div>
+		</div>
+
+		<div class="table">
+			<div class="table-row">
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+			</div>
+		</div>
+
+		<div class="table">
+			<div class="table-row">
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+			</div>
+		</div>
+
+		<div class="table">
+			<div class="table-row">
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+			</div>
+		</div>
+
+		<div class="table">
+			<div class="table-row">
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+			</div>
+		</div>
+
+		<div class="table">
+			<div class="table-row">
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+			</div>
+		</div>
+
+		<div class="table">
+			<div class="table-row">
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+			</div>
+		</div>
+
+		<div class="table">
+			<div class="table-row">
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+			</div>
+		</div>
+
+		<div class="table">
+			<div class="table-row">
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+				<div class="box">
+				</div>
+			</div>
+		</div>
+		-->
+	</body>
+	
+</html>

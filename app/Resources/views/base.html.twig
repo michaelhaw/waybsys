@@ -2,8 +2,17 @@
 <html>
     <head>
         <meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+			<link href="{{ asset('css/normalize.css') }}" rel="stylesheet" />
+			<link href="{{ asset('css/skeleton.css') }}" rel="stylesheet" />
+			<link href="{{ asset('css/tablesorter.css') }}" rel="stylesheet" />
+		{% endblock %}
+		
+		<script type="text/javascript" src="{{ asset('js/jquery-latest.js') }}"></script> 
+		<script type="text/javascript" src="{{ asset('js/jquery.tablesorter.js') }}"></script> 
+		
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>

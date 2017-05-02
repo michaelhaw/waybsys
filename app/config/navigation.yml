@@ -1,0 +1,24 @@
+home:
+    label: Home
+    href: /
+    subitems:
+waybill:
+    label: Waybill/AR
+    href: #
+    subitems:
+        create:
+            label: Create
+            href: #
+        search:
+            label: Search
+            href: #
+customer:
+    label: Customer
+    href: #
+    subitems:
+        create:
+            label: Create
+            href: #
+        search:
+            label: Search
+            href: #

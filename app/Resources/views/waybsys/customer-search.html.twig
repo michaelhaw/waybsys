@@ -1,0 +1,79 @@
+{# app/Resources/views/waybsys/customer-search.html.twig #}
+
+{% extends 'waybsys/base.html.twig' %}
+
+{% block content %}
+	
+	{{ form_start(form) }}
+	
+		{{ form_errors(form) }}
+		
+		<div class="row">
+			<div class="one column">
+				{{ form_label(form.customer_name, 'Name') }}
+			</div>
+			<div class="six columns">
+				{{ form_errors(form.customer_name) }}
+				{{ form_widget(form.customer_name, {'attr': {'class': 'u-full-width', 'placeholder': 'Search All Customers...'}}) }}
+			</div>
+		</div>
+		
+		{{ form_widget(form.search, {'attr': {'class': 'button-primary'}}) }}
+		
+	{{ form_end(form) }}
+	
+	<table id="CustomerTable" class="u-full-width tablesorter ">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Address</th>
+				<th>Rate</th>
+				<th>Edit</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% if customers %} 
+				{% for customer in customers %}
+					<tr>
+						<td>{{ customer.getCustomerName() }}</td>
+						<td>{{ customer.getCustomerAddress() }}{% if customer.getCustomerCity() %}, {{ customer.getCustomerCity() }}{% endif %}{% if customer.getCustomerCountry() %}, {{ customer.getCustomerCountry() }} {% endif %}</td>
+						<td>{{ customer.getRateVolume() }} + {{ customer.getRateValue() }}</td>
+						<td><a href="{{ path('customer_edit', {'customer_id': customer.getCustomerId()}) }}"><img src="../icons/pen-checkbox-128.png" class="editbtn" /></a></td>
+					</tr>
+				{% endfor %}
+			{% endif %}
+		</tbody>
+	</table>
+
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<style>
+		.editbtn {
+			height: 24px;
+			width: 24px;
+			margin-left: 15px;
+			cursor: pointer;
+			transition: 0.3s;
+		}
+	</style>	
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		
+		$(document).ready(function() {
+			$("#CustomerTable").tablesorter({
+				headers: {
+					// Disable sorting for edit column
+					3: {
+						sorter: false
+					}
+				}
+			}); 
+		}); 
+		
+	</script>
+	{{ parent() }}
+{% endblock %}

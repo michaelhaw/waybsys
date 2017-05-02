@@ -1,0 +1,12 @@
+{% if menuitem.subitems %} 
+	<li class="dropdown">
+		<a href="{{ menuitem.href }}" class="dropbtn">{{ menuitem.label }}</a>
+			<div class="dropdown-content">
+				{% for subitem in menuitem.subitems %}
+					<a href="{{ subitem.href }}">{{ subitem.label }}</a>
+				{% endfor %}
+			</div>
+	</li>
+{% else %}
+	<li><a href="{{ menuitem.href }}">{{ menuitem.label }}</a></li>
+{% endif %}

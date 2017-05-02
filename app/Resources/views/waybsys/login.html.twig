@@ -1,0 +1,98 @@
+{# app/Resources/views/waybsys/login.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}CCTSI WAYBSYS{% endblock %}
+
+{% block body %}
+
+	<div id="LoginWrapper">
+		<form action="{{ path('login') }}" method="post">
+			<div id="LoginBoxWrapper">
+				<div id="LoginBox">
+					<div id="UsernameLabel" class="component">
+						<label for="username">Username:</label>
+					</div>
+					
+					<div id="UsernameInput" class="component">
+						<input type="text" id="username" name="_username" value="{{ last_username }}" />
+					</div>
+
+					<div id="PasswordLabel" class="component">
+						<label for="password">Password:</label>
+					</div>
+					
+					<div id="PasswordInput" class="component">
+						<input type="password" id="password" name="_password" />
+					</div>
+					
+					{% if error %}
+						<div id="ErrorDisplay">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+					{% endif %}
+
+					{#
+						If you want to control the URL the user
+						is redirected to on success (more details below)
+						<input type="hidden" name="_target_path" value="/account" />
+					#}
+
+					<div id="SubmitArea">
+						<button type="submit">Login</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+	<style>
+
+		body {
+			background: white;
+			width: 90%;
+			margin: auto;
+			min-width: 400px;
+		}
+		
+		#LoginWrapper {
+			width: 100%;
+			margin: 0 auto;
+		}
+		
+		#LoginBoxWrapper {
+			width: 300px;
+			height: 150px;
+			margin: 150px auto;
+			background: #DCC7AA;
+			border-radius: 25px;
+			border: 2px solid #F7882F;
+			padding: 20px; 
+		}
+		
+		#LoginBox {
+			position: relative;
+			height: 100%;
+		}
+		
+		#LoginBox .component {
+			width: 100%;
+			margin-bottom: 10px;
+		}
+		
+		#ErrorDisplay {
+			position: absolute;
+			bottom: 0px;
+			left: 5px;
+			color: red;
+		}
+		
+		#SubmitArea {
+			position: absolute;
+			bottom: 0px;
+			right: 0px;
+		}
+	
+	</style>
+{% endblock %}

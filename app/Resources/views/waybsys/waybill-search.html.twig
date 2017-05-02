@@ -1,0 +1,111 @@
+{# app/Resources/views/waybsys/waybill-search.html.twig #}
+
+{% extends 'waybsys/base.html.twig' %}
+
+{% block content %}
+	
+	{{ form_start(form) }}
+	
+		{{ form_errors(form) }}
+		
+		<div class="row">
+			<div class="one column">
+				{{ form_label(form.waybill_no, 'AR No.') }}
+			</div>
+			<div class="six columns">
+				{{ form_errors(form.waybill_no) }}
+				{{ form_widget(form.waybill_no, {'attr': {'class': 'u-full-width', 'placeholder': 'Search All AR Numbers...'}}) }}
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="one column">
+				{{ form_label(form.destination, 'Destination') }}
+			</div>
+			<div class="six columns">
+				{{ form_errors(form.destination) }}
+				{{ form_widget(form.destination, {'attr': {'class': 'u-full-width', 'placeholder': 'Search All Destinations...'}}) }}
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="one column">
+				{{ form_label(form.shipper, 'Shipper') }}
+			</div>
+			<div class="six columns">
+				{{ form_errors(form.shipper) }}
+				{{ form_widget(form.shipper, {'attr': {'class': 'u-full-width', 'placeholder': 'Search All Shippers...'}}) }}
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="one column">
+				{{ form_label(form.consignee, 'Consignee') }}
+			</div>
+			<div class="six columns">
+				{{ form_errors(form.consignee) }}
+				{{ form_widget(form.consignee, {'attr': {'class': 'u-full-width', 'placeholder': 'Search All Consignees...'}}) }}
+			</div>
+		</div>
+		
+		{{ form_widget(form.search, {'attr': {'class': 'button-primary'}}) }}
+		
+	{{ form_end(form) }}
+	
+	<table id="WaybillTable" class="u-full-width tablesorter ">
+		<thead>
+			<tr>
+				<th>AR No.</th>
+				<th>Destination</th>
+				<th>Total Amount</th>
+				<th>Edit</th>
+				<th>Print</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% if waybills %} 
+				{% for waybill in waybills %}
+					<tr>
+						<td>{{ waybill.getWaybillNo() }}</td>
+						<td>{{ waybill.getDestination()}}</td>
+						<td>{{ waybill.getTotalAmount() }}</td>
+						<td><a href="{{ path('waybill_edit', {'waybill_no': waybill.getWaybillNo()}) }}"><img src="../icons/pen-checkbox-128.png" class="editbtn" /></a></td>
+						<td><a href="{{ path('print_waybill', {'waybill_no': waybill.getWaybillNo()}) }}" target="_blank" ><img src="../icons/printer-128.png" class="editbtn"/></a></td>
+					</tr>
+				{% endfor %}
+			{% endif %}
+		</tbody>
+	</table>
+
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<style>
+		.editbtn {
+			height: 24px;
+			width: 24px;
+			margin-left: 15px;
+			cursor: pointer;
+			transition: 0.3s;
+		}
+	</style>	
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		
+		$(document).ready(function() {
+			$("#WaybillTable").tablesorter({
+				headers: {
+					// Disable sorting for edit column
+					3: {
+						sorter: false
+					}
+				}
+			}); 
+		}); 
+		
+	</script>
+	{{ parent() }}
+{% endblock %}

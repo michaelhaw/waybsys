@@ -1,0 +1,190 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CCTSI WAYBSYS{% endblock %}
+
+{% block body %}
+
+	<div id="Wrapper">
+	
+		{% for type, flash_messages in app.session.flashBag.all %}
+			{% for flash_message in flash_messages %}
+				<div class="alert flash-{{ type }}">
+					<span class="closebtn">&times;</span>  
+					{{ flash_message }}
+				</div>
+			{% endfor %}
+		{% endfor %}
+	
+		<div id="Header">
+			{% block header %}
+				<h1>Coastal Cargo Transport Services, Inc.</h1>
+			{% endblock %}
+		</div>
+		
+		<div id="Menu">
+			{% block Menu %}
+				<ul>
+					{% for menuitem in navigation %}
+						{{ include('waybsys/dropdownmenu.html.twig', {'menuitem': menuitem}) }}
+					{% endfor %}
+					<li style="float:right">
+						<a href="{{ path('logout') }}" class="logout">Logout</a>
+					</li>
+				</ul>
+			{% endblock %}
+		</div>
+		
+		<div id ="Content">
+			{% block content %}
+				<p>Content Here</p>
+			{% endblock %}
+		</div>
+		
+	</div>
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	
+	<style>
+	
+		html, body, #Wrapper {
+			height: 100%;
+		}
+	
+		body {
+			background: white;
+			width: 90%;
+			margin: auto;
+			min-width: 800px;
+			position: relative;
+		}
+		
+		#Wrapper {
+			width: 100%;
+			margin: 0 auto;
+		}
+		
+		#Header {
+			float: left;
+			height: 100px;
+			width: 100%;
+			background: #6B7A8F;
+			color: white;
+		}
+		
+		#Menu {
+			float: left;
+			width: 100%;
+			background: #F7882F;
+		}
+
+		#Menu ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			background-color: #F7882F;
+		}
+
+		#Menu li {
+			float: left;
+			margin-bottom: 0rem;
+		}
+
+		#Menu li a, .dropbtn {
+			display: inline-block;
+			color: white;
+			text-align: center;
+			padding: 14px 16px;
+			text-decoration: none;
+		}
+
+		#Menu li a:hover, .dropdown:hover .dropbtn {
+			background-color: #D7680F;
+		}
+
+		#Menu li.dropdown {
+			display: inline-block;
+		}
+
+		#Menu .dropdown-content {
+			display: none;
+			position: absolute;
+			background-color: #F7882F;
+			min-width: 160px;
+			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+			z-index: 1;
+		}
+
+		#Menu .dropdown-content a {
+			color: white;
+			padding: 12px 16px;
+			text-decoration: none;
+			display: block;
+			text-align: left;
+		}
+
+		#Menu .dropdown-content a:hover {
+			background-color: #D7680F
+		}
+
+		#Menu .dropdown:hover .dropdown-content {
+			display: block;
+		}
+		
+		#Content {
+			float: left;
+			width: 100%;
+			min-height: 800px;
+			background: #DCC7AA;
+		}
+		
+		.alert {
+			padding: 10px;
+			background-color: #f44336;
+			color: white;
+			opacity: 1;
+			transition: opacity 0.6s;
+			margin-bottom: 5px;
+			border-radius: 15px;
+			border: 2px solid white;
+		}
+
+		.flash-success {background-color: #4CAF50;}
+		.flash-notice {background-color: #2196F3;}
+		.flash-warning {background-color: #ff9800;}
+
+		.closebtn {
+			margin-left: 15px;
+			color: white;
+			font-weight: bold;
+			float: right;
+			font-size: 22px;
+			line-height: 20px;
+			cursor: pointer;
+			transition: 0.3s;
+		}
+
+		.closebtn:hover {
+			color: black;
+		}
+		
+	</style>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script>
+		var close = document.getElementsByClassName("closebtn");
+		var i;
+
+		for (i = 0; i < close.length; i++) {
+			close[i].onclick = function(){
+				var div = this.parentElement;
+				div.style.opacity = "0";
+				setTimeout(function(){ div.style.display = "none"; }, 600);
+			}
+		}
+	</script>
+{% endblock %}

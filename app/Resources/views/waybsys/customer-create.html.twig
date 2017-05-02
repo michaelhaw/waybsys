@@ -1,0 +1,62 @@
+{# app/Resources/views/waybsys/customer-create.html.twig #}
+
+{% extends 'waybsys/base.html.twig' %}
+
+{% block content %}
+
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+		
+		<div class="row">
+			<div class="six columns">
+				{{ form_label(form.customer_name, 'Name') }}
+				{{ form_errors(form.customer_name) }}
+				{{ form_widget(form.customer_name, {'attr': {'class': 'u-full-width', 'placeholder': 'New Customer'}}) }}
+			</div>
+			<div class="two columns">
+				{{ form_label(form.customer_contact_no, 'Contact No.') }}
+				{{ form_errors(form.customer_contact_no) }}
+				{{ form_widget(form.customer_contact_no, {'attr': {'class': 'u-full-width', 'placeholder': '(02) 000-0000'}}) }}
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="six columns">
+				{{ form_label(form.customer_address, 'Address') }}
+				{{ form_errors(form.customer_address) }}
+				{{ form_widget(form.customer_address, {'attr': {'class': 'u-full-width', 'placeholder': 'Street address'}}) }}
+			</div>
+			<div class="two columns">
+				{{ form_label(form.customer_city, 'City') }}
+				{{ form_errors(form.customer_city) }}
+				{{ form_widget(form.customer_city, {'attr': {'class': 'u-full-width'}}) }}
+			</div>
+			<div class="two columns">
+				{{ form_label(form.customer_country, 'Country') }}
+				{{ form_errors(form.customer_country) }}
+				{{ form_widget(form.customer_country, {'attr': {'class': 'u-full-width', 'placeholder': 'Philippines'}}) }}
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="three columns">
+				{{ form_label(form.rate_volume, 'Volume Rate') }}
+				{{ form_errors(form.rate_volume) }}
+				{{ form_widget(form.rate_volume, {'attr': {'class': 'u-full-width', 'placeholder': '0.00'}}) }}
+			</div>
+			<div class="three columns">
+				{{ form_label(form.rate_value, 'Value Charge Rate') }}
+				{{ form_errors(form.rate_value) }}
+				{{ form_widget(form.rate_value, {'attr': {'class': 'u-full-width', 'placeholder': '0.00'}}) }}
+			</div>
+		</div>
+		
+		{{ form_label(form.customer_notes, 'Notes') }}
+		{{ form_errors(form.customer_notes) }}
+		{{ form_widget(form.customer_notes, {'attr': {'class': 'u-full-width', 'placeholder': 'Additional info...'}}) }}
+		
+		{{ form_widget(form.save, {'attr': {'class': 'button-primary'}}) }}
+		
+	{{ form_end(form) }}
+
+{% endblock %}
