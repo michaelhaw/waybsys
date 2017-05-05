@@ -24,12 +24,23 @@
 		<div id="Menu">
 			{% block Menu %}
 				<ul>
-					{% for menuitem in navigation %}
-						{{ include('waybsys/dropdownmenu.html.twig', {'menuitem': menuitem}) }}
+					{% for menuitem in navigation.app %}
+						{{ include('waybsys/navigation/dropdownmenu.html.twig', {'menuitem': menuitem}) }}
 					{% endfor %}
+					
 					<li style="float:right">
 						<a href="{{ path('logout') }}" class="logout">Logout</a>
 					</li>
+					
+					{% for menuitem in navigation.user %}
+						{{ include('waybsys/navigation/dropdownmenu.html.twig', {'menuitem': menuitem}) }}
+					{% endfor %}
+					
+					{% if is_granted('ROLE_ADMIN') %}
+						{% for menuitem in navigation.admin %}
+							{{ include('waybsys/navigation/dropdownmenu.html.twig', {'menuitem': menuitem}) }}
+						{% endfor %}
+					{% endif %}
 				</ul>
 			{% endblock %}
 		</div>

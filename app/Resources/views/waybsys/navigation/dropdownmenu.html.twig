@@ -1,5 +1,5 @@
 {% if menuitem.subitems %} 
-	<li class="dropdown">
+	<li class="dropdown"{% if menuitem.isRight %} style="float:right"{% endif %}>
 		<a href="{{ menuitem.href }}" class="dropbtn">{{ menuitem.label }}</a>
 			<div class="dropdown-content">
 				{% for subitem in menuitem.subitems %}

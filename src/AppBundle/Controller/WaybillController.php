@@ -67,7 +67,7 @@ class WaybillController extends Controller
 			return $this->redirectToRoute('waybill_create');
 		}
 		
-		return $this->render('waybsys/waybill-create.html.twig', [
+		return $this->render('waybsys/waybill/waybill-create.html.twig', [
             'navigation' => $nav->getNavigationDropdownArray(),
 			'form' => $form->createView(),
         ]);
@@ -132,7 +132,7 @@ class WaybillController extends Controller
 		
 		
 		
-		return $this->render('waybsys/waybill-search.html.twig', [
+		return $this->render('waybsys/waybill/waybill-search.html.twig', [
             'navigation' => $nav->getNavigationDropdownArray(),
 			'form' => $form->createView(),
 			'waybills' => $waybills,
@@ -189,7 +189,7 @@ class WaybillController extends Controller
 			return $this->redirectToRoute('waybill_edit', array('waybill_no' => $waybill_no));
 		}
 		
-		return $this->render('waybsys/waybill-edit.html.twig', [
+		return $this->render('waybsys/waybill/waybill-edit.html.twig', [
             'navigation' => $nav->getNavigationDropdownArray(),
 			'form' => $form->createView(),
         ]);

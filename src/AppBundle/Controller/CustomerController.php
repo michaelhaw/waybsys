@@ -46,7 +46,7 @@ class CustomerController extends Controller
 			return $this->redirectToRoute('customer_create');
 		}
 		
-		return $this->render('waybsys/customer-create.html.twig', [
+		return $this->render('waybsys/customer/customer-create.html.twig', [
             'navigation' => $nav->getNavigationDropdownArray(),
 			'form' => $form->createView(),
         ]);
@@ -82,7 +82,7 @@ class CustomerController extends Controller
 						)->setParameter('customer_name','%'.$customer_name.'%' );
 		$customers = $query->getResult();
 		
-		return $this->render('waybsys/customer-search.html.twig', [
+		return $this->render('waybsys/customer/customer-search.html.twig', [
             'navigation' => $nav->getNavigationDropdownArray(),
 			'form' => $form->createView(),
 			'customers' => $customers,
@@ -120,7 +120,7 @@ class CustomerController extends Controller
 			return $this->redirectToRoute('customer_edit', array('customer_id' => $customer_id));
 		}
 		
-		return $this->render('waybsys/customer-create.html.twig', [
+		return $this->render('waybsys/customer/customer-create.html.twig', [
             'navigation' => $nav->getNavigationDropdownArray(),
 			'form' => $form->createView(),
         ]);

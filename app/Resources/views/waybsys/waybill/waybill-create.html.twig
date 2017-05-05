@@ -1,4 +1,4 @@
-{# app/Resources/views/waybsys/waybill-edit.html.twig #}
+{# app/Resources/views/waybsys/waybill/waybill-create.html.twig #}
 
 {% extends 'waybsys/base.html.twig' %}
 
@@ -75,68 +75,6 @@
 				{{ form_errors(form.cargo) }}
 				<ul class="cargo" data-prototype="{{ block('_cargo_entry_widget')|e('html_attr') }}" style="list-style-type:none">
 				<!--<ul class="cargo" data-prototype="{{ form_widget(form.cargo.vars.prototype)|e('html_attr') }}">-->
-					{% for cargo_entry in form.cargo %}
-						<li><div>
-							<div class="row">
-								<div class="one column">
-									{{ form_label(cargo_entry.quantity, 'Qty.') }}
-									{{ form_widget(cargo_entry.quantity, {'attr': {'class': 'u-full-width', 'required': 'required'}}) }}
-								</div>
-								<div class="two columns">
-									{{ form_label(cargo_entry.unit, 'Unit') }}
-									{{ form_widget(cargo_entry.unit, {'attr': {'class': 'u-full-width', 'required': 'required'}}) }}
-								</div>
-								<div class="six columns">
-									{{ form_label(cargo_entry.description, 'Description') }}
-									{{ form_widget(cargo_entry.description, {'attr': {'class': 'u-full-width', 'required': 'required'}}) }}
-								</div>
-								<div class="two columns">
-									{{ form_label(cargo_entry.declared_value, 'Declared Value') }}
-									{{ form_widget(cargo_entry.declared_value, {'attr': {'class': 'u-full-width', 'required': 'required'}}) }}
-								</div>
-							</div>
-							<div class="row">
-								<div class="two columns">
-									{{ form_label(cargo_entry.length, 'Length') }}
-									{{ form_widget(cargo_entry.length, {'attr': {'class': 'u-full-width'}}) }}
-								</div>
-								<div class="two columns">
-									{{ form_label(cargo_entry.width, 'Width') }}
-									{{ form_widget(cargo_entry.width, {'attr': {'class': 'u-full-width'}}) }}
-								</div>
-								<div class="two columns">
-									{{ form_label(cargo_entry.height, 'Height') }}
-									{{ form_widget(cargo_entry.height, {'attr': {'class': 'u-full-width'}}) }}
-								</div>
-								<div class="two columns">
-									{{ form_label(cargo_entry.total_volume, 'Total Volume') }}
-									{{ form_widget(cargo_entry.total_volume, {'attr': {'class': 'u-full-width'}}) }}
-								</div>
-								<div class="two columns">
-									{{ form_label(cargo_entry.weight, 'Weight') }}
-									{{ form_widget(cargo_entry.weight, {'attr': {'class': 'u-full-width'}}) }}
-								</div>
-							</div>
-							<div class="row">
-								<div class="two columns">
-									{{ form_label(cargo_entry.charge_type, 'Charge Type') }}
-									{{ form_widget(cargo_entry.charge_type, {'attr': {'class': 'u-full-width'}}) }}
-								</div>
-								<div class="two columns">
-									{{ form_label(cargo_entry.volume_charge, 'Volume Charge') }}
-									{{ form_widget(cargo_entry.volume_charge, {'attr': {'class': 'u-full-width'}}) }}
-								</div>
-								<div class="two columns">
-									{{ form_label(cargo_entry.weight_charge, 'Weight Charge') }}
-									{{ form_widget(cargo_entry.weight_charge, {'attr': {'class': 'u-full-width'}}) }}
-								</div>
-								<div class="two columns">
-									{{ form_label(cargo_entry.additional_charge, 'Additional Charge') }}
-									{{ form_widget(cargo_entry.additional_charge, {'attr': {'class': 'u-full-width'}}) }}
-								</div>
-							</div>
-						</div></li>
-					{% endfor %}
 				</ul>
 			</div>
 		</div>

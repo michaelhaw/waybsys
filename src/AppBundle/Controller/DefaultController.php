@@ -43,15 +43,6 @@ class DefaultController extends Controller
     }
 	
 	/**
-     * @Route("/admin")
-	 * @Security("has_role('ROLE_ADMIN')")
-     */
-    public function adminAction()
-    {
-        return new Response('<html><body>Admin page!</body></html>');
-    }
-	
-	/**
      * @Route("/registerAdmin")
      */
     public function registerAdmin()
