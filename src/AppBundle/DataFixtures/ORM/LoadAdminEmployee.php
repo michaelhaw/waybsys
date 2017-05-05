@@ -13,7 +13,7 @@ class LoadAdminEmployee extends AbstractFixture implements OrderedFixtureInterfa
 {
     public function load(ObjectManager $manager)
     {
-        $employeeAdmin = new Employee();
+        $employeeAdmin = $this->getAdminEmployee($manager);
 
 		$employeeAdmin->setFirstName('System');
 		$employeeAdmin->setLastName('Admin');
@@ -31,4 +31,8 @@ class LoadAdminEmployee extends AbstractFixture implements OrderedFixtureInterfa
         // the lower the number, the sooner that this fixture is loaded
         return 1;
     }
+	
+	private function getAdminEmployee(ObjectManager $manager){
+		return $manager->getRepository('AppBundle:Employee')->findOneBy(array('email' => 'admin@waybsys.com')) ?: new Employee();
+	}
 }

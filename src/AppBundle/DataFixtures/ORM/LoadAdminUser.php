@@ -24,14 +24,17 @@ class LoadAdminUser extends AbstractFixture implements OrderedFixtureInterface, 
 	
     public function load(ObjectManager $manager)
     {
-        $userAdmin = new User();
+        $userAdmin = $this->getAdminUser($manager);
 		
 		$userAdmin->setUsername('admin');
 		
-		$encoder = $this->container->get('security.password_encoder');
-        $password = $encoder->encodePassword($userAdmin, 'admin');
+		if(!$userAdmin->getPassword()){
+			$encoder = $this->container->get('security.password_encoder');
+			$password = $encoder->encodePassword($userAdmin, 'admin');
+			
+			$userAdmin->setPassword($password);
+		}
 		
-		$userAdmin->setPassword($password);
 		$userAdmin->setIsActive(true);
 		$userAdmin->setRole('ROLE_SUPER_ADMIN');
 		$userAdmin->setEmployee($this->getReference('admin-empoyee'));
@@ -44,4 +47,8 @@ class LoadAdminUser extends AbstractFixture implements OrderedFixtureInterface, 
     {
         return 2;
     }
+	
+	private function getAdminUser(ObjectManager $manager){
+		return $manager->getRepository('AppBundle:User')->findOneBy(array('username' => 'admin')) ?: new User();
+	}
 }
