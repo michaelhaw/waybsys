@@ -56,6 +56,11 @@ class Waybill
      * @ORM\Column(name="destination", type="string", length=3)
      */
     private $destination;
+	
+	/**
+     * @ORM\Column(name="waybill_date", type="date", nullable=true)
+     */
+    private $waybill_date;
 
     /**
      * @ORM\Column(name="total_amount", type="decimal", precision=11, scale=2)
@@ -96,6 +101,38 @@ class Waybill
      * @ORM\OneToMany(targetEntity="Cargo", mappedBy="waybill")
      */
     private $cargo;
+	
+	/**
+     * @ORM\Column(name="received_by", type="string", length=8, nullable=true)
+     */
+    private $received_by;
+	
+	/**
+     * @ORM\Column(name="received_at", type="string", length=8, nullable=true)
+     */
+    private $received_at;
+	
+	/**
+     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="created_by", referencedColumnName="user_id", nullable=true)
+     */
+    //private $created_by;
+	
+	/**
+     * @ORM\Column(name="created_on", type="datetime", nullable=true)
+     */
+    //private $created_on;
+	
+	/**
+     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="modified_by", referencedColumnName="user_id", nullable=true)
+     */
+    //private $modified_by;
+	
+	/**
+     * @ORM\Column(name="modified_on", type="datetime", nullable=true)
+     */
+    //private $modified_on;
 
 	/**
 	*	Waybill Constructor
@@ -104,6 +141,9 @@ class Waybill
     public function __construct()
     {
         $this->cargo = new ArrayCollection();
+		$ts = date('Y-m-d H:i:s');
+		$this->created_on = $ts;
+		$this->modified_on = $ts;
     }
 
     /**
@@ -412,5 +452,77 @@ class Waybill
     public function getTotalVat()
     {
         return $this->total_vat;
+    }
+
+    /**
+     * Set waybillDate
+     *
+     * @param \DateTime $waybillDate
+     *
+     * @return Waybill
+     */
+    public function setWaybillDate($waybillDate)
+    {
+        $this->waybill_date = $waybillDate;
+
+        return $this;
+    }
+
+    /**
+     * Get waybillDate
+     *
+     * @return \DateTime
+     */
+    public function getWaybillDate()
+    {
+        return $this->waybill_date;
+    }
+
+    /**
+     * Set receivedBy
+     *
+     * @param string $receivedBy
+     *
+     * @return Waybill
+     */
+    public function setReceivedBy($receivedBy)
+    {
+        $this->received_by = $receivedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get receivedBy
+     *
+     * @return string
+     */
+    public function getReceivedBy()
+    {
+        return $this->received_by;
+    }
+
+    /**
+     * Set receivedAt
+     *
+     * @param string $receivedAt
+     *
+     * @return Waybill
+     */
+    public function setReceivedAt($receivedAt)
+    {
+        $this->received_at = $receivedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get receivedAt
+     *
+     * @return string
+     */
+    public function getReceivedAt()
+    {
+        return $this->received_at;
     }
 }

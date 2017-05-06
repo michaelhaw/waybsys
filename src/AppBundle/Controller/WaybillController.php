@@ -31,7 +31,13 @@ class WaybillController extends Controller
     {
 		$nav = new Navigation();
 		
+		//Get current employee
+		$user = $this->getUser();
+		$employee = $user->getEmployee();
+		
 		$waybill = new Waybill();
+		$waybill->setReceivedBy(substr($employee->getFirstName(),0,8));
+		$waybill->setReceivedAt($employee->getLocalOffice());
 		$form = $this->createForm(WaybillType::class, $waybill);
 		
 		$form->handleRequest($request);
@@ -44,18 +50,10 @@ class WaybillController extends Controller
 			
 			$em->persist($waybill);
 			
-			$total = 0;
-			
 			foreach($waybill->getCargo() as $cargo) {
 				$cargo->setWaybill($waybill);
 				$em->persist($cargo);
-				
-				//[FIXME] Remove temp calc
-				$total += $cargo->getDeclaredValue() * $cargo->getQuantity();
 			}
-			
-			//[FIXME] Remove temp total amount
-			$waybill->setTotalAmount($total);
 			
 			$em->flush();
 

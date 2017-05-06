@@ -31,12 +31,12 @@ class Employee
     private $first_name;
 	
 	/**
-     * @ORM\Column(name="extra_name", type="string", length=50)
+     * @ORM\Column(name="extra_name", type="string", length=50, nullable=true)
      */
     private $extra_name;
 	
 	/**
-     * @ORM\Column(name="middle_name", type="string", length=50)
+     * @ORM\Column(name="middle_name", type="string", length=50, nullable=true)
      */
     private $middle_name;
 
@@ -44,6 +44,11 @@ class Employee
      * @ORM\Column(name="email", type="string", length=60, unique=true)
      */
     private $email;
+	
+	/**
+     * @ORM\Column(name="local_office", type="string", length=3, nullable=true)
+     */
+    private $local_office;
 
 
     /**

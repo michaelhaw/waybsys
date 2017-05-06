@@ -44,6 +44,11 @@ class Employee
      * @ORM\Column(name="email", type="string", length=60, unique=true)
      */
     private $email;
+	
+	/**
+     * @ORM\Column(name="local_office", type="string", length=3, nullable=true)
+     */
+    private $local_office;
 
 
     /**
@@ -174,5 +179,29 @@ class Employee
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set localOffice
+     *
+     * @param string $localOffice
+     *
+     * @return Employee
+     */
+    public function setLocalOffice($localOffice)
+    {
+        $this->local_office = $localOffice;
+
+        return $this;
+    }
+
+    /**
+     * Get localOffice
+     *
+     * @return string
+     */
+    public function getLocalOffice()
+    {
+        return $this->local_office;
     }
 }

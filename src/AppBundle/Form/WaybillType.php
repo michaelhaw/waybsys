@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -38,6 +39,14 @@ class WaybillType extends AbstractType
 					'Bacolod' => 'BCD'
 				)
 			))
+            ->add('waybill_date', DateType::class, array(
+				'widget' => 'choice', 
+				'format' => 'MM/dd/yyyy',
+				'html5' => true,
+				'required' => false
+			))
+            ->add('received_by', TextType::class, array('required' => false))
+            ->add('received_at', TextType::class, array('required' => false))
             ->add('total_amount', MoneyType::class, array('currency' => false, 'required' => false))
             ->add('total_weight_charge', MoneyType::class, array('currency' => false, 'required' => false))
             ->add('total_value_charge', MoneyType::class, array('currency' => false, 'required' => false))

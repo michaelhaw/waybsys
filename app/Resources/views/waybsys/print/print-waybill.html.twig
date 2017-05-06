@@ -152,16 +152,20 @@
 				<td colspan="2"></td>
 				<td></td>
 				<td colspan="5"></td>
-				<td colspan="4">DATE</td>
+				<td colspan="4">
+					{% if waybill.getWaybillDate()%}
+						{{ waybill.getWaybillDate().format('m/d/Y') }}
+					{% endif %}
+				</td>
 				<td></td>
 			</tr>
 			<tr class="second-qtr-inch">
 				<td colspan="2"></td>
 				<td></td>
 				<td></td>
-				<td colspan="3">BY</td>
+				<td colspan="3">{{ waybill.getReceivedBy() }}</td>
 				<td></td>
-				<td colspan="3">BY AT</td>
+				<td colspan="3">{{ waybill.getReceivedAt() }}</td>
 				<td colspan="2"></td>
 			</tr>
 			<tr class="third-qtr-inch">

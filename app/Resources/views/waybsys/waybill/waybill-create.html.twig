@@ -18,6 +18,21 @@
 				{{ form_errors(form.destination) }}
 				{{ form_widget(form.destination, {'attr': {'class': 'u-full-width', 'placeholder': 'Select destination'}}) }}
 			</div>
+			<div class="three columns">
+				{{ form_label(form.waybill_date, 'Date') }}
+				{{ form_errors(form.waybill_date) }}
+				{{ form_widget(form.waybill_date, {'attr': {'class': 'u-full-width'}}) }}
+			</div>
+			<div class="two columns">
+				{{ form_label(form.received_by, 'Received By') }}
+				{{ form_errors(form.received_by) }}
+				{{ form_widget(form.received_by, {'attr': {'class': 'u-full-width'}}) }}
+			</div>
+			<div class="two columns">
+				{{ form_label(form.received_at, 'Received At') }}
+				{{ form_errors(form.received_at) }}
+				{{ form_widget(form.received_at, {'attr': {'class': 'u-full-width'}}) }}
+			</div>
 		</div>
 		
 		<div class="row">

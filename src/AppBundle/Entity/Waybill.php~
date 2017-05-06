@@ -56,36 +56,41 @@ class Waybill
      * @ORM\Column(name="destination", type="string", length=3)
      */
     private $destination;
+	
+	/**
+     * @ORM\Column(name="waybill_date", type="date", nullable=true)
+     */
+    private $waybill_date;
 
     /**
      * @ORM\Column(name="total_amount", type="decimal", precision=11, scale=2)
      */
-    private $total_amount = 0;
+    private $total_amount;
 
     /**
-     * @ORM\Column(name="total_weight_charge", type="decimal", precision=11, scale=2)
+     * @ORM\Column(name="total_weight_charge", type="decimal", precision=11, scale=2, nullable=true)
      */
-    private $total_weight_charge = 0;
+    private $total_weight_charge;
 
     /**
-     * @ORM\Column(name="total_value_charge", type="decimal", precision=11, scale=2)
+     * @ORM\Column(name="total_value_charge", type="decimal", precision=11, scale=2, nullable=true)
      */
-    private $total_value_charge = 0;
+    private $total_value_charge;
 
     /**
-     * @ORM\Column(name="total_cu_msmt_charge", type="decimal", precision=11, scale=2)
+     * @ORM\Column(name="total_cu_msmt_charge", type="decimal", precision=11, scale=2, nullable=true)
      */
-    private $total_cu_msmt_charge = 0;
+    private $total_cu_msmt_charge;
 
     /**
-     * @ORM\Column(name="total_delivery_charge", type="decimal", precision=11, scale=2)
+     * @ORM\Column(name="total_delivery_charge", type="decimal", precision=11, scale=2, nullable=true)
      */
-    private $total_delivery_charge = 0;
+    private $total_delivery_charge;
 
     /**
-     * @ORM\Column(name="total_vat", type="decimal", precision=11, scale=2)
+     * @ORM\Column(name="total_vat", type="decimal", precision=11, scale=2, nullable=true)
      */
-    private $total_vat = 0;
+    private $total_vat;
 
     /**
      * @ORM\Column(name="notes", type="text", nullable=true)
@@ -96,6 +101,38 @@ class Waybill
      * @ORM\OneToMany(targetEntity="Cargo", mappedBy="waybill")
      */
     private $cargo;
+	
+	/**
+     * @ORM\Column(name="received_by", type="string", length=8, nullable=true)
+     */
+    private $received_by;
+	
+	/**
+     * @ORM\Column(name="received_at", type="string", length=8, nullable=true)
+     */
+    private $received_at;
+	
+	/**
+     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="created_by", referencedColumnName="user_id")
+     */
+    private $created_by;
+	
+	/**
+     * @ORM\Column(name="created_on", type="datetime")
+     */
+    private $created_on;
+	
+	/**
+     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="modified_by", referencedColumnName="user_id")
+     */
+    private $modified_by;
+	
+	/**
+     * @ORM\Column(name="modified_on", type="datetime")
+     */
+    private $modified_on;
 
 	/**
 	*	Waybill Constructor
@@ -197,7 +234,7 @@ class Waybill
      */
     public function addCargo(\AppBundle\Entity\Cargo $cargo)
     {
-        $this->cargo[] = $cargo;
+        $this->cargo->add($cargo);
 
         return $this;
     }
@@ -292,5 +329,149 @@ class Waybill
     public function getWaybillNo()
     {
         return $this->waybill_no;
+    }
+
+    /**
+     * Set totalWeightCharge
+     *
+     * @param string $totalWeightCharge
+     *
+     * @return Waybill
+     */
+    public function setTotalWeightCharge($totalWeightCharge)
+    {
+        $this->total_weight_charge = $totalWeightCharge;
+
+        return $this;
+    }
+
+    /**
+     * Get totalWeightCharge
+     *
+     * @return string
+     */
+    public function getTotalWeightCharge()
+    {
+        return $this->total_weight_charge;
+    }
+
+    /**
+     * Set totalValueCharge
+     *
+     * @param string $totalValueCharge
+     *
+     * @return Waybill
+     */
+    public function setTotalValueCharge($totalValueCharge)
+    {
+        $this->total_value_charge = $totalValueCharge;
+
+        return $this;
+    }
+
+    /**
+     * Get totalValueCharge
+     *
+     * @return string
+     */
+    public function getTotalValueCharge()
+    {
+        return $this->total_value_charge;
+    }
+
+    /**
+     * Set totalCuMsmtCharge
+     *
+     * @param string $totalCuMsmtCharge
+     *
+     * @return Waybill
+     */
+    public function setTotalCuMsmtCharge($totalCuMsmtCharge)
+    {
+        $this->total_cu_msmt_charge = $totalCuMsmtCharge;
+
+        return $this;
+    }
+
+    /**
+     * Get totalCuMsmtCharge
+     *
+     * @return string
+     */
+    public function getTotalCuMsmtCharge()
+    {
+        return $this->total_cu_msmt_charge;
+    }
+
+    /**
+     * Set totalDeliveryCharge
+     *
+     * @param string $totalDeliveryCharge
+     *
+     * @return Waybill
+     */
+    public function setTotalDeliveryCharge($totalDeliveryCharge)
+    {
+        $this->total_delivery_charge = $totalDeliveryCharge;
+
+        return $this;
+    }
+
+    /**
+     * Get totalDeliveryCharge
+     *
+     * @return string
+     */
+    public function getTotalDeliveryCharge()
+    {
+        return $this->total_delivery_charge;
+    }
+
+    /**
+     * Set totalVat
+     *
+     * @param string $totalVat
+     *
+     * @return Waybill
+     */
+    public function setTotalVat($totalVat)
+    {
+        $this->total_vat = $totalVat;
+
+        return $this;
+    }
+
+    /**
+     * Get totalVat
+     *
+     * @return string
+     */
+    public function getTotalVat()
+    {
+        return $this->total_vat;
+    }
+
+    /**
+     * Set waybillDate
+     *
+     * @param \DateTime $waybillDate
+     *
+     * @return Waybill
+     */
+    public function setWaybillDate($waybillDate)
+    {
+        $this->waybill_date = $waybillDate;
+
+        return $this;
+    }
+
+    /**
+     * Get waybillDate
+     *
+     * @return \DateTime
+     */
+    public function getWaybillDate()
+    {
+        return $this->waybill_date;
     }
 }
