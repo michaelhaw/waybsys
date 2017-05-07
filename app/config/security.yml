@@ -18,7 +18,7 @@ security:
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js|icons|fonts)/
+            pattern: ^/(_(profiler|wdt)|css|images|icons|fonts|js)/
             security: false
 
         main:
