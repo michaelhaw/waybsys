@@ -69,8 +69,8 @@
 						<td>{{ waybill.getWaybillNo() }}</td>
 						<td>{{ waybill.getDestination()}}</td>
 						<td>{{ waybill.getTotalAmount() }}</td>
-						<td><a href="{{ path('waybill_edit', {'waybill_no': waybill.getWaybillNo()}) }}"><img src="../icons/pen-checkbox-128.png" class="editbtn" /></a></td>
-						<td><a href="{{ path('print_waybill', {'waybill_no': waybill.getWaybillNo()}) }}" target="_blank" ><img src="../icons/printer-128.png" class="editbtn"/></a></td>
+						<td><a href="{{ path('waybill_edit', {'waybill_no': waybill.getWaybillNo()}) }}"><img src="{{ asset('icons/pen-checkbox-128.png') }}" class="editbtn" /></a></td>
+						<td><a href="{{ path('print_waybill', {'waybill_no': waybill.getWaybillNo()}) }}" target="_blank" ><img src="{{ asset('icons/printer-128.png') }}" class="editbtn"/></a></td>
 					</tr>
 				{% endfor %}
 			{% endif %}

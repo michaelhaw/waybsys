@@ -38,7 +38,7 @@
 						<td>{{ customer.getCustomerName() }}</td>
 						<td>{{ customer.getCustomerAddress() }}{% if customer.getCustomerCity() %}, {{ customer.getCustomerCity() }}{% endif %}{% if customer.getCustomerCountry() %}, {{ customer.getCustomerCountry() }} {% endif %}</td>
 						<td>{{ customer.getRateVolume() }} + {{ customer.getRateValue() }}</td>
-						<td><a href="{{ path('customer_edit', {'customer_id': customer.getCustomerId()}) }}"><img src="../icons/pen-checkbox-128.png" class="editbtn" /></a></td>
+						<td><a href="{{ path('customer_edit', {'customer_id': customer.getCustomerId()}) }}"><img src="{{ asset('icons/pen-checkbox-128.png') }}" class="editbtn" /></a></td>
 					</tr>
 				{% endfor %}
 			{% endif %}
