@@ -20,7 +20,7 @@ class CustomerType extends AbstractType
     {
         $builder
             ->add('customer_name', TextType::class)
-            ->add('customer_address', TextType::class)
+            ->add('customer_address', TextType::class, array('required' => false))
             ->add('customer_city', TextType::class, array('required' => false))
             ->add('customer_country', CountryType::class, array('required' => false))
             ->add('customer_contact_no', TextType::class, array('required' => false))
