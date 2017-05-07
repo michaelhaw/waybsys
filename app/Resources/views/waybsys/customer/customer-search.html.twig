@@ -36,7 +36,7 @@
 				{% for customer in customers %}
 					<tr>
 						<td>{{ customer.getCustomerName() }}</td>
-						<td>{{ customer.getCustomerAddress() }}{% if customer.getCustomerCity() %}, {{ customer.getCustomerCity() }}{% endif %}{% if customer.getCustomerCountry() %}, {{ customer.getCustomerCountry()|country }} {% endif %}</td>
+						<td>{{ customer.getCustomerAddress() }}{% if customer.getCustomerAddress() and customer.getCustomerCity() %}, {% endif %}{% if customer.getCustomerCity() %}{{ customer.getCustomerCity() }}{% endif %}{% if (customer.getCustomerAddress() or customer.getCustomerCity()) and customer.getCustomerCountry() %}, {% endif %}{% if customer.getCustomerCountry() %}{{ customer.getCustomerCountry()|country }}{% endif %}</td>
 						<td>{{ customer.getRateVolume() }} + {{ customer.getRateValue() }}</td>
 						<td><a href="{{ path('customer_edit', {'customer_id': customer.getCustomerId()}) }}"><img src="{{ asset('images/pen-checkbox-128.png') }}" class="editbtn" /></a></td>
 					</tr>
