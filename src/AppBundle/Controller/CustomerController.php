@@ -26,6 +26,8 @@ class CustomerController extends Controller
 		$nav = new Navigation();
 		
 		$customer = new Customer();
+		$customer->setCustomerCountry('PH');
+		
 		$form = $this->createForm(CustomerType::class, $customer);
 		
 		$form->handleRequest($request);

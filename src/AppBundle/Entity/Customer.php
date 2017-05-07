@@ -39,7 +39,6 @@ class Customer
 	
 	/**
      * @ORM\Column(name="customer_address", type="text", nullable=true)
-     * @Assert\NotBlank()
      */
     private $customer_address;
 	
