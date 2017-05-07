@@ -58,10 +58,11 @@ class CustomerController extends Controller
     public function searchCustomer(Request $request)
     {
 		$nav = new Navigation();
-		$search = new SearchCustomer();
+		
+		$defaultData = array('message' => 'Search Customer',);
 		$customer_name = '';
 		
-		$form = $this->createFormBuilder($search)
+		$form = $this->createFormBuilder($defaultData)
 			->setMethod('GET')
 			->add('customer_name', TextType::class, array('required' => False))
 			->add('search', SubmitType::class, array('label' => 'Search'))
@@ -70,7 +71,8 @@ class CustomerController extends Controller
 		$form->handleRequest($request);
 		
 		if ($form->isSubmitted() && $form->isValid()) {
-			$customer_name = $form['customer_name']->getData();
+			$data = $form->getData();
+			$customer_name = $data['customer_name'];
 		}
 		
 		$em = $this->getDoctrine()->getManager();
@@ -126,21 +128,4 @@ class CustomerController extends Controller
         ]);
 	}
 
-}
-
-class SearchCustomer {
-	
-	private $customer_name;
-	
-	public function getCustomerName()
-    {
-        return $this->customer_name;
-    }
-	
-    public function setCustomerName($customer_name)
-    {
-        $this->customer_name = $customer_name;
-
-        return $this;
-    }
 }

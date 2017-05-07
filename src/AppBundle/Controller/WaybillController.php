@@ -77,23 +77,25 @@ class WaybillController extends Controller
     public function searchWaybill(Request $request)
     {
 		$nav = new Navigation();
-		$search = new SearchWaybill();
 		
+		$defaultData = array('message' => 'Search Waybill',);
 		$waybill_no = '';
-		$shipper = '';
-		$consignee = '';
+		$shipper_id = '';
+		$consignee_id = '';
 		$destination = '';
 		
-		$form = $this->createFormBuilder($search)
+		$form = $this->createFormBuilder($defaultData)
 			->setMethod('GET')
-			->add('waybill_no', TextType::class, array('required' => False))
+			->add('waybill_no', TextType::class, array('required' => false))
             ->add('shipper', EntityType::class, array(
 				'class' => 'AppBundle:Customer',
-				'choice_label' => 'customer_name'
+				'choice_label' => 'customer_name',
+				'required' => false,
 			))
             ->add('consignee', EntityType::class, array(
 				'class' => 'AppBundle:Customer',
-				'choice_label' => 'customer_name'
+				'choice_label' => 'customer_name',
+				'required' => false,
 			))
             ->add('destination', ChoiceType::class, array(
 				'choices' => array(
@@ -102,7 +104,7 @@ class WaybillController extends Controller
 					'Cebu' => 'CEB',
 					'Iloilo' => 'ILO',
 					'Bacolod' => 'BCD'
-				)
+				),
 			))
 			->add('search', SubmitType::class, array('label' => 'Search'))
 			->getForm();
@@ -110,10 +112,16 @@ class WaybillController extends Controller
 		$form->handleRequest($request);
 		
 		if ($form->isSubmitted() && $form->isValid()) {
-			$waybill_no = $form['waybill_no']->getData();
-			$shipper = $form['shipper']->getData();
-			$consignee = $form['consignee']->getData();
-			$destination = $form['destination']->getData();
+			$data = $form->getData();
+			
+			$waybill_no = $data['waybill_no'];
+			if($data['shipper']) {
+				$shipper_id = $data['shipper']->getCustomerId();
+			}
+			if($data['consignee']) {
+				$consignee_id = $data['consignee']->getCustomerId();
+			}
+			$destination = $data['destination'];
 		}
 		
 		$em = $this->getDoctrine()->getManager();
@@ -122,10 +130,14 @@ class WaybillController extends Controller
 						FROM AppBundle:Waybill w
 						WHERE lower(w.waybill_no) like lower(:waybill_no)
 						AND lower(w.destination) like lower(:destination)
+						AND IDENTITY(w.shipper) like :shipper_id
+						AND IDENTITY(w.consignee) like :consignee_id
 						ORDER BY w.waybill_no ASC'
 					)
 						->setParameter('waybill_no','%'.$waybill_no.'%' )
-						->setParameter('destination','%'.$destination.'%' );
+						->setParameter('destination','%'.$destination.'%' )
+						->setParameter('shipper_id',$shipper_id ?: '%' )
+						->setParameter('consignee_id',$consignee_id ?: '%' );
 		$waybills = $query->getResult();
 		
 		
@@ -206,60 +218,4 @@ class WaybillController extends Controller
 			'waybill' => $waybill,
         ]);
 	}
-}
-
-class SearchWaybill {
-	
-	private $waybill_no;
-	private $shipper;
-	private $consignee;
-	private $destination;
-	
-	public function getWaybillNo()
-    {
-        return $this->waybill_no;
-    }
-	
-    public function setWaybillNo($waybill_no)
-    {
-        $this->waybill_no = $waybill_no;
-
-        return $this;
-    }
-	
-	public function getShipper()
-    {
-        return $this->shipper;
-    }
-	
-    public function setShipper($shipper)
-    {
-        $this->shipper = $shipper;
-
-        return $this;
-    }
-	
-	public function getConsignee()
-    {
-        return $this->consignee;
-    }
-	
-    public function setConsignee($consignee)
-    {
-        $this->consignee = $consignee;
-
-        return $this;
-    }
-	
-	public function getDestination()
-    {
-        return $this->destination;
-    }
-	
-    public function setDestination($destination)
-    {
-        $this->destination = $destination;
-
-        return $this;
-    }
 }
