@@ -1,5 +1,7 @@
-Waybsys - Generic Waybill System
+Waybsys - Generic Waybill System [DEPRECATED]
 ========================
+
+This has been deprecated due to old Symfony version.
 
 Waybill Tracking system framework built in PHP using the Symfony PHP Framework.
 
